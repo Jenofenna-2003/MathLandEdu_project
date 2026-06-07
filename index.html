@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathLand - Learn Math Through Stories</title>
+    <!-- Google Fonts: Outfit for body, Fredoka for child-friendly headings -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Outfit:wght@100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Starry Background Overlay -->
+    <div class="stars-container">
+        <div class="stars"></div>
+        <div class="stars2"></div>
+        <div class="stars3"></div>
+    </div>
+
+    <!-- Main Application Wrapper -->
+    <div id="app" class="app-wrapper">
+        <!-- Main Navigation Bar -->
+        <header class="app-header">
+            <div class="header-logo" id="nav-logo-btn">
+                <span class="logo-emoji">🎮</span>
+                <span class="logo-text">Math<span class="logo-accent">Land</span></span>
+            </div>
+
+            <!-- Student Stats (Visible in Game Mode) -->
+            <div class="header-stats" id="header-stats-panel">
+                <div class="stat-badge coin-badge">
+                    <span class="stat-icon">🪙</span>
+                    <span class="stat-val" id="user-coins">0</span>
+                </div>
+                <div class="stat-badge star-badge">
+                    <span class="stat-icon">⭐</span>
+                    <span class="stat-val" id="user-stars">0</span>
+                </div>
+                <div class="stat-badge level-badge">
+                    <span class="stat-icon">🛡️</span>
+                    <span class="stat-val" id="user-level-badge">Lvl 1</span>
+                </div>
+                <div class="user-avatar-mini" id="user-avatar-mini">
+                    <!-- Dynamically populated mini avatar -->
+                </div>
+            </div>
+
+            <!-- Navigation Links -->
+            <nav class="app-nav">
+                <button class="nav-btn active" data-target="screen-home" id="nav-home">
+                    <span class="nav-icon">🏰</span> Play
+                </button>
+                <button class="nav-btn" data-target="screen-parent" id="nav-parent">
+                    <span class="nav-icon">📊</span> Parent Panel
+                </button>
+                <button class="nav-btn" data-target="screen-teacher" id="nav-teacher">
+                    <span class="nav-icon">👩‍🏫</span> Teacher Class
+                </button>
+                <button class="nav-btn icon-only" id="btn-sound-toggle" title="Toggle Sound">
+                    <span id="sound-icon">🔊</span>
+                </button>
+            </nav>
+        </header>
+
+        <!-- Main Content Container containing Screens -->
+        <main class="app-main">
+
+            <!-- SCREEN 1: HOME SCREEN -->
+            <section id="screen-home" class="game-screen active-screen">
+                <div class="hero-container">
+                    <h1 class="hero-title">Become a Math Hero!</h1>
+                    <p class="hero-subtitle">Embark on a magical quest to defeat the Dragon King and learn math through
+                        amazing stories!</p>
+
+                    <div class="hero-showcase">
+                        <div class="floating-island">
+                            <span class="island-emoji">🌳</span>
+                            <span class="island-hero-sprite">🧙‍♂️</span>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn btn-primary btn-lg pulse" id="btn-start-adventure">
+                            Start Adventure 🚀
+                        </button>
+                        <button class="btn btn-secondary btn-lg" id="btn-quick-login">
+                            Hero Login 🔑
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SCREEN 2: CHARACTER CUSTOMIZATION / LOGIN -->
+            <section id="screen-customizer" class="game-screen">
+                <div class="customizer-container glass-card">
+                    <h2 class="section-title">Create Your Hero</h2>
+                    <p class="section-desc">Choose your character class and customize your explorer gear!</p>
+
+                    <div class="customizer-layout">
+                        <!-- Left Side: Avatar Preview -->
+                        <div class="avatar-preview-box">
+                            <div class="avatar-display" id="avatar-display-character">
+                                <!-- Large avatar graphic rendered with layered CSS/SVGs -->
+                                <div class="avatar-base" id="avatar-preview-base">🧑</div>
+                                <div class="avatar-item item-head" id="avatar-preview-head"></div>
+                                <div class="avatar-item item-hand" id="avatar-preview-hand"></div>
+                                <div class="avatar-item item-effect" id="avatar-preview-effect"></div>
+                            </div>
+                            <div class="avatar-glow"></div>
+                        </div>
+
+                        <!-- Right Side: Customization Options -->
+                        <div class="customizer-form">
+                            <div class="form-group">
+                                <label for="hero-name-input">Hero Name</label>
+                                <input type="text" id="hero-name-input" maxlength="12" placeholder="e.g., Tom the Brave"
+                                    value="MathExplorer">
+                            </div>
+
+                            <div class="form-group">
+                                <label>Select Your Class</label>
+                                <div class="class-selector-grid">
+                                    <div class="class-card-option active" data-class="knight">
+                                        <span class="class-emoji">🛡️</span>
+                                        <span class="class-name">Knight</span>
+                                        <span class="class-desc">Swords and Shields</span>
+                                    </div>
+                                    <div class="class-card-option" data-class="wizard">
+                                        <span class="class-emoji">🪄</span>
+                                        <span class="class-name">Wizard</span>
+                                        <span class="class-desc">Magic and Spells</span>
+                                    </div>
+                                    <div class="class-card-option" data-class="princess">
+                                        <span class="class-emoji">👑</span>
+                                        <span class="class-name">Princess</span>
+                                        <span class="class-desc">Luminous crowns</span>
+                                    </div>
+                                    <div class="class-card-option" data-class="explorer">
+                                        <span class="class-emoji">🧭</span>
+                                        <span class="class-name">Explorer</span>
+                                        <span class="class-desc">Maps and Binoculars</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Customize Outfit Color</label>
+                                <div class="color-options-row">
+                                    <span class="color-dot active" data-color="crimson"
+                                        style="background-color: #ff3366;"></span>
+                                    <span class="color-dot" data-color="royal"
+                                        style="background-color: #3366ff;"></span>
+                                    <span class="color-dot" data-color="emerald"
+                                        style="background-color: #33cc66;"></span>
+                                    <span class="color-dot" data-color="amber"
+                                        style="background-color: #ffcc00;"></span>
+                                    <span class="color-dot" data-color="shadow"
+                                        style="background-color: #9933ff;"></span>
+                                </div>
+                            </div>
+
+                            <button class="btn btn-primary btn-block btn-lg" id="btn-save-hero">
+                                Save and Enter MathLand ➡️
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SCREEN 3: WORLD MAP -->
+            <section id="screen-map" class="game-screen">
+                <div class="map-header">
+                    <div class="map-title-block">
+                        <h2 class="map-title">Map of MathLand</h2>
+                        <p class="map-subtitle">Select a world and take on a mathematical quest!</p>
+                    </div>
+                    <button class="btn btn-secondary" id="btn-change-character">
+                        ✏️ Change Hero
+                    </button>
+                </div>
+
+                <!-- Interactive Map Graphic -->
+                <div class="world-map-wrapper">
+                    <div class="world-map-graphic">
+                        <!-- Connecting path SVG -->
+                        <svg class="map-path-svg" width="100%" height="100%">
+                            <path id="map-path" d="" fill="none" stroke="rgba(255, 204, 0, 0.4)" stroke-width="8"
+                                stroke-dasharray="15, 10" />
+                        </svg>
+
+                        <!-- World Node 1: Addition Forest -->
+                        <div class="world-node active-node" id="node-forest" data-world="1">
+                            <div class="node-icon-wrapper">
+                                <span class="node-emoji">🌳</span>
+                            </div>
+                            <div class="node-info glass-card">
+                                <h3>Addition Forest</h3>
+                                <div class="node-progress">
+                                    <div class="progress-bar-fill" style="width: 0%;" id="progress-forest"></div>
+                                </div>
+                                <span class="node-progress-text">0 / 4 Cleared</span>
+                            </div>
+                        </div>
+
+                        <!-- World Node 2: Multiplication Mountains -->
+                        <div class="world-node locked-node" id="node-mountains" data-world="2">
+                            <div class="node-icon-wrapper">
+                                <span class="node-emoji">⛰️</span>
+                                <span class="lock-indicator">🔒</span>
+                            </div>
+                            <div class="node-info glass-card">
+                                <h3>Multiplication Mountains</h3>
+                                <div class="node-progress">
+                                    <div class="progress-bar-fill" style="width: 0%;" id="progress-mountains"></div>
+                                </div>
+                                <span class="node-progress-text">Locked (Lvl 3)</span>
+                            </div>
+                        </div>
+
+                        <!-- World Node 3: Fraction Kingdom -->
+                        <div class="world-node locked-node" id="node-fractions" data-world="3">
+                            <div class="node-icon-wrapper">
+                                <span class="node-emoji">🍕</span>
+                                <span class="lock-indicator">🔒</span>
+                            </div>
+                            <div class="node-info glass-card">
+                                <h3>Fraction Kingdom</h3>
+                                <div class="node-progress">
+                                    <div class="progress-bar-fill" style="width: 0%;" id="progress-fractions"></div>
+                                </div>
+                                <span class="node-progress-text">Locked (Lvl 5)</span>
+                            </div>
+                        </div>
+
+                        <!-- World Node 4: Geometry Castle -->
+                        <div class="world-node locked-node" id="node-castle" data-world="4">
+                            <div class="node-icon-wrapper">
+                                <span class="node-emoji">🏰</span>
+                                <span class="lock-indicator">🔒</span>
+                            </div>
+                            <div class="node-info glass-card">
+                                <h3>Geometry Castle</h3>
+                                <div class="node-progress">
+                                    <div class="progress-bar-fill" style="width: 0%;" id="progress-castle"></div>
+                                </div>
+                                <span class="node-progress-text">Locked (Lvl 7)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Levels Drawer Overlay -->
+                <div class="levels-drawer-overlay" id="levels-drawer-overlay">
+                    <div class="levels-drawer glass-card">
+                        <div class="drawer-header">
+                            <h3 id="drawer-world-title">World Levels</h3>
+                            <button class="close-btn" id="btn-close-drawer">&times;</button>
+                        </div>
+                        <div class="levels-list" id="drawer-levels-list">
+                            <!-- Dynamically populated level items -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SCREEN 4: QUEST PAGE -->
+            <section id="screen-quest" class="game-screen">
+                <div class="quest-layout">
+                    <!-- Left Panel: Story Narrative -->
+                    <div class="quest-story-panel glass-card">
+                        <div class="quest-story-header">
+                            <button class="btn btn-secondary btn-sm" id="btn-quest-back-map">
+                                ⬅️ Escape to Map
+                            </button>
+                            <div class="quest-world-tag" id="quest-world-tag">Addition Forest</div>
+                        </div>
+
+                        <div class="quest-npc-visual">
+                            <div class="npc-sprite" id="quest-npc-sprite">👹</div>
+                            <div class="npc-bubble" id="quest-dialog-bubble">
+                                "Halt explorer! None shall cross my bridge unless you solve my riddle!"
+                            </div>
+                        </div>
+
+                        <div class="quest-story-body">
+                            <h3 class="quest-level-title" id="quest-level-title">Quest 1: The Bridge Troll</h3>
+                            <p class="quest-story-text" id="quest-story-text">
+                                You walk along the green path, but a big friendly green Troll guards the rope bridge. He
+                                has a stone tablet with numbers carved on it.
+                            </p>
+                        </div>
+
+                        <div class="quest-narration-bar">
+                            <button class="btn btn-sound btn-block" id="btn-read-aloud">
+                                🔊 Read Story Aloud
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Right Panel: Mathematical Puzzle -->
+                    <div class="quest-puzzle-panel glass-card">
+                        <div class="puzzle-header">
+                            <span class="puzzle-title">Hero's Riddle</span>
+                            <div class="streak-indicator" id="streak-indicator" title="Current Solve Streak">
+                                🔥 <span id="streak-count">0</span>
+                            </div>
+                        </div>
+
+                        <div class="puzzle-box">
+                            <div class="quest-question-text" id="quest-question-text">
+                                5 + 7 = ?
+                            </div>
+
+                            <!-- Options Grid for Multiple Choice -->
+                            <div class="puzzle-options" id="puzzle-options-container">
+                                <!-- Dynamically populated answer buttons -->
+                            </div>
+                        </div>
+
+                        <!-- Feedback & Actions Area -->
+                        <div class="puzzle-footer">
+                            <div class="alert-box" id="quest-feedback-alert">
+                                <!-- Dynamic feedback text (Hint, Correct, Try Again) -->
+                            </div>
+
+                            <div class="puzzle-actions-row">
+                                <button class="btn btn-help" id="btn-ai-helper-trigger">
+                                    🤖 Help Me (AI Helper)
+                                </button>
+                                <button class="btn btn-primary" id="btn-submit-answer" disabled>
+                                    Check Answer Check ✔️
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SCREEN 5: PARENT DASHBOARD -->
+            <section id="screen-parent" class="game-screen">
+                <div class="dashboard-header">
+                    <div>
+                        <h2 class="section-title">👨‍👩‍👧 Parent Portal</h2>
+                        <p class="section-desc">Track your child's math accomplishments, learning speed, and focus
+                            areas.</p>
+                    </div>
+                    <button class="btn btn-secondary" id="btn-reset-data">
+                        ⚠️ Reset All Progress
+                    </button>
+                </div>
+
+                <div class="dashboard-grid">
+                    <!-- Card 1: Key Metrics -->
+                    <div class="dashboard-card glass-card span-all-cols-mobile">
+                        <h3>Learning Summary</h3>
+                        <div class="metrics-grid">
+                            <div class="metric-item">
+                                <span class="metric-label">Hero Level</span>
+                                <span class="metric-value" id="parent-hero-level">1</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Lessons Solved</span>
+                                <span class="metric-value" id="parent-lessons-count">0</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Coins Collected</span>
+                                <span class="metric-value" id="parent-coins-count">0</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Badges Earned</span>
+                                <span class="metric-value" id="parent-badges-count">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Card 2: Skill Focus Areas -->
+                    <div class="dashboard-card glass-card">
+                        <h3>Subject Strengths & Weaknesses</h3>
+                        <div class="skills-progress-list" id="parent-skills-list">
+                            <!-- Dynamically rendered percentage bars -->
+                        </div>
+                    </div>
+
+                    <!-- Card 3: Practice Suggestions -->
+                    <div class="dashboard-card glass-card">
+                        <h3>Practice Recommendations</h3>
+                        <div class="alerts-list" id="parent-recommendations-list">
+                            <!-- Dynamic recommendations based on accuracy -->
+                        </div>
+                    </div>
+
+                    <!-- Card 4: Historical Activity Chart (Visual SVG) -->
+                    <div class="dashboard-card glass-card span-2-cols">
+                        <h3>Weekly Quest Activity</h3>
+                        <div class="svg-chart-container" id="parent-activity-chart">
+                            <!-- Dynamically populated SVG Chart -->
+                        </div>
+                    </div>
+
+                    <!-- Card 5: Badges Cabinet -->
+                    <div class="dashboard-card glass-card span-2-cols">
+                        <h3>Badges Cabinet</h3>
+                        <div class="badges-shelf" id="parent-badges-shelf">
+                            <!-- Badge cards with lock/unlock states -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SCREEN 6: TEACHER DASHBOARD -->
+            <section id="screen-teacher" class="game-screen">
+                <div class="dashboard-header">
+                    <div>
+                        <h2 class="section-title">👩‍🏫 Teacher Dashboard</h2>
+                        <p class="section-desc">Manage your classroom, assign target math worlds, and track student
+                            success.</p>
+                    </div>
+                    <button class="btn btn-primary" id="btn-teacher-add-student">
+                        ➕ Add Student
+                    </button>
+                </div>
+
+                <div class="dashboard-grid">
+                    <!-- Class Summary Stats -->
+                    <div class="dashboard-card glass-card span-3-cols">
+                        <h3>Class Overview</h3>
+                        <div class="metrics-grid">
+                            <div class="metric-item">
+                                <span class="metric-label">Active Roster</span>
+                                <span class="metric-value" id="teacher-class-size">4 Students</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Avg Accuracy</span>
+                                <span class="metric-value" id="teacher-avg-accuracy">82%</span>
+                            </div>
+                            <div class="metric-item">
+                                <span class="metric-label">Class Total Quests</span>
+                                <span class="metric-value" id="teacher-total-quests">28 Completed</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Student Progress Table -->
+                    <div class="dashboard-card glass-card span-3-cols overflow-x">
+                        <h3>Student Roster</h3>
+                        <table class="roster-table">
+                            <thead>
+                                <tr>
+                                    <th>Student Name</th>
+                                    <th>Current Level</th>
+                                    <th>Coins</th>
+                                    <th>Stars</th>
+                                    <th>Addition Forest</th>
+                                    <th>Multiplication Mtns</th>
+                                    <th>Fractions Kingdom</th>
+                                    <th>Geometry Castle</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="teacher-student-table-body">
+                                <!-- Dynamically populated student rows -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- AI HELPER MODAL -->
+        <div class="modal-backdrop" id="ai-helper-modal">
+            <div class="modal-content glass-card">
+                <div class="modal-header">
+                    <div class="modal-title-group">
+                        <span class="modal-icon">🤖</span>
+                        <h3>AI Tutor Helper</h3>
+                    </div>
+                    <button class="close-btn" id="btn-close-ai-modal">&times;</button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="ai-speech-bubble">
+                        <p id="ai-helper-explanation-text">
+                            Let's solve this puzzle together! Here is a visual way to think about the problem:
+                        </p>
+                    </div>
+
+                    <!-- Dynamic visual aid section -->
+                    <div class="ai-visual-drawing-box" id="ai-visual-canvas">
+                        <!-- JS will inject custom SVG drawings here (e.g. grids of apples, fraction circles, outlines) -->
+                    </div>
+
+                    <div class="ai-guidelines-box" id="ai-helper-guidelines">
+                        <!-- Step-by-step pointers -->
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-primary btn-block" id="btn-close-ai-modal-ok">
+                        Got It, Thanks! 👍
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- BADGE UNLOCKED MODAL -->
+        <div class="modal-backdrop" id="badge-modal">
+            <div class="modal-content glass-card badge-congratulations-modal">
+                <div class="badge-fireworks">🎇</div>
+                <div class="badge-celebration-icon" id="badge-unlocked-icon">🏅</div>
+                <h2 class="badge-celebration-title">Badge Unlocked!</h2>
+                <h3 class="badge-celebration-name" id="badge-unlocked-name">Addition Master</h3>
+                <p class="badge-celebration-desc" id="badge-unlocked-desc">Successfully completed single digit addition
+                    quests!</p>
+                <button class="btn btn-primary" id="btn-close-badge-modal">
+                    Claim Rewards 💰
+                </button>
+            </div>
+        </div>
+
+        <!-- TEACHER ADD STUDENT MODAL -->
+        <div class="modal-backdrop" id="teacher-add-modal">
+            <div class="modal-content glass-card modal-sm">
+                <div class="modal-header">
+                    <h3>Add New Student</h3>
+                    <button class="close-btn" id="btn-close-add-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="new-student-name">Student Name</label>
+                        <input type="text" id="new-student-name" placeholder="e.g. Liam">
+                    </div>
+                    <div class="form-group">
+                        <label for="new-student-age">Age</label>
+                        <input type="number" id="new-student-age" min="5" max="15" value="8">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" id="btn-cancel-add-student">Cancel</button>
+                    <button class="btn btn-primary" id="btn-confirm-add-student">Add Student</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
